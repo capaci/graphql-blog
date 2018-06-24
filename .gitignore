@@ -1,0 +1,6 @@
+*.swp
+.vscode/
+.idea/
+node_modules/
+dist/
+

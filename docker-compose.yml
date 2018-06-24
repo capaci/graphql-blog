@@ -1,0 +1,26 @@
+version: '2'
+networks:
+  api:
+  db:
+services:
+  db:
+    image: mongo:3.6.3
+    volumes:
+      - ./volumes/db:/data/db
+    networks:
+      - db
+    ports:
+     - "27017:27017"
+  api:
+    image: node:10.5.0
+    ports:
+    - "3000:3000"
+    volumes:
+      - ./api:/api
+    command: sh -c "cd /api && npm install && npm start"
+    networks:
+      - db
+      - api
+    depends_on:
+      - db
+#docker-compose -p docker up --build

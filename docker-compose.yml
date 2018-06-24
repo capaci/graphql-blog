@@ -17,7 +17,7 @@ services:
     - "3000:3000"
     volumes:
       - ./api:/api
-    command: sh -c "cd /api && npm install && npm start"
+    command: sh -c "cd /api && npm install && npm run nodemon"
     networks:
       - db
       - api

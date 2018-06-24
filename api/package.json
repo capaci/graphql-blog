@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "node_modules/.bin/nodemon --delay 5 dist/app",
     "build": "node_modules/.bin/gulp build",
     "watch": "node_modules/.bin/gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +16,7 @@
     "gulp": "3.9.1",
     "gulp-clean": "0.3.2",
     "gulp-typescript": "3.2.2",
+    "nodemon": "1.12.0",
     "typescript": "2.5.3"
   }
 }

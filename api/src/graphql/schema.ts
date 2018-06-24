@@ -3,8 +3,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 const users: any[] = [
     {
         id: 1,
-        name: 'Daenarys',
-        email: 'dan@westeros.com'
+        name: 'Dany',
+        email: 'dany@westeros.com'
     },
     {
         id: 2,

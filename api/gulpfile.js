@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const clean = require('gulp-clean');
 const ts = require('gulp-typescript');
+const nodemon = require('gulp-nodemon');
 
 const tsProject = ts.createProject('tsconfig.json');
 
@@ -29,6 +30,15 @@ gulp.task('build', ['scripts']);
 gulp.task('watch', ['build'], () => {
     return gulp.watch(['src/**/*.ts', 'src/**/*.json'], ['build']);
 });
+
+gulp.task('nodemon', ['watch'], done => {
+  nodemon({
+    script: './dist/index.js',
+    ext: 'js',
+    env: { 'NODE_ENV': 'development' },
+    done: done
+  })
+})
 
 gulp.task('default', ['watch']);
 

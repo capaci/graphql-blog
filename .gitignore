@@ -3,6 +3,8 @@
 .idea/
 node_modules/
 dist/
+volumes/db/*
+!volumes/db/.gitkeep
 
 # Logs
 logs

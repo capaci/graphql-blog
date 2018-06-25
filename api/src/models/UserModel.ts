@@ -14,7 +14,7 @@ export interface UserAttributes {
 }
 
 export interface UserInstance extends Sequelize.Instance<UserAttributes>, UserAttributes {
-    comparePassword(encodedPassword: string, password: string): boolean;
+    isPassword(encodedPassword: string, password: string): boolean;
 }
 
 export interface UserModel extends BaseModelInterface, Sequelize.Model<UserInstance, UserAttributes> {}

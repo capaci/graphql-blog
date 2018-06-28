@@ -31,7 +31,8 @@ export const userResolvers = {
                 .catch(handleError);
         },
 
-        user: (parent, { id }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+        user: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+            let id = parseInt(args.id)
             return db.User
                 .findById(id)
                 .then((user: UserInstance) => {

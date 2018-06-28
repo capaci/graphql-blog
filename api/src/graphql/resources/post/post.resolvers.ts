@@ -33,7 +33,8 @@ export const postResolvers = {
                 }).catch(handleError);
         },
 
-        post: (parent, { id }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+        post: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+            let id = parseInt(args.id)
             return db.Post
                 .findById(id)
                 .then((post: PostInstance) => {

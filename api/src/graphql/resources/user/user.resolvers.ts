@@ -3,6 +3,8 @@ import { Transaction } from 'sequelize';
 
 import { DbConnection } from '../../../interfaces/DbConnectionInterface';
 import { UserInstance } from '../../../models/UserModel';
+import { handleError } from '../../../utils/utils';
+
 export const userResolvers = {
 
     User: {
@@ -14,6 +16,7 @@ export const userResolvers = {
                     limit: first,
                     offset
                 })
+                .catch(handleError);
         }
     },
 
@@ -25,6 +28,7 @@ export const userResolvers = {
                     limit: first,
                     offset: offset
                 })
+                .catch(handleError);
         },
 
         user: (parent, { id }, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -34,6 +38,7 @@ export const userResolvers = {
                     if (!user) throw new Error(`user with id ${id} not found!`);
                     return user;
                 })
+                .catch(handleError);
         }
 
     },
@@ -43,7 +48,7 @@ export const userResolvers = {
         createUsers: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
             return db.sequelize.transaction((t: Transaction) => {
                 return db.User.create(args.input, { transaction: t });
-            })
+            }).catch(handleError);
         },
 
         updateUser: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -55,7 +60,7 @@ export const userResolvers = {
                         if (!user) throw new Error(`user with id ${id} not found!`);
                         return user.update(args.input, { transaction: t });
                     });
-            })
+            }).catch(handleError);
         },
 
         updateUserPassword: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -68,7 +73,7 @@ export const userResolvers = {
                         return user.update(args.input, { transaction: t })
                             .then((user: UserInstance) => !!user);
                     });
-            })
+            }).catch(handleError);
         },
 
         deleteUser: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
@@ -80,9 +85,9 @@ export const userResolvers = {
                         if (!user) throw new Error(`user with id ${id} not found!`);
                         return user.destroy({ transaction: t })
                             // a bug with sequelize types doesnt allow use UserInstance as a type for destroy return
-                            .then((user) => !!user);
+                            .then(user => !!user);
                     });
-            })
+            }).catch(handleError);
         }
 
     }

@@ -46,7 +46,7 @@ export const userResolvers = {
 
     Mutation: {
 
-        createUsers: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+        createUser: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
             return db.sequelize.transaction((t: Transaction) => {
                 return db.User.create(args.input, { transaction: t });
             }).catch(handleError);

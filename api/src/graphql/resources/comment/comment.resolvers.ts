@@ -39,7 +39,7 @@ export const commentResolvers = {
 
     Mutation: {
 
-        createComments: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
+        createComment: (parent, args, { db }: { db: DbConnection }, info: GraphQLResolveInfo) => {
             return db.sequelize.transaction((t: Transaction) => {
                 return db.Comment.create(args.input, { transaction: t });
             }).catch(handleError);

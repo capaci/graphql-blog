@@ -17,13 +17,15 @@ class App {
 
         this.express.use('/graphql',
             (req, res, next) => {
-              req['context'] = {};  
-              req['context'].db = db;  
+                req['context'] = {};
+                req['context'].db = db;
+                next();
             },
             graphqlHTTP((req) => ({
                 schema,
-                graphiql: process.env.NODE_ENV === 'development',
-                context: req['context']
+                graphiql: process.env.NODE_ENV != 'production',
+                context: req['context'],
+                pretty: true
             }))
         );
 

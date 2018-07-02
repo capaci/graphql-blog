@@ -35,7 +35,10 @@ gulp.task('nodemon', ['watch'], done => {
   nodemon({
     script: './dist/index.js',
     ext: 'js',
-    env: { 'NODE_ENV': 'development' },
+    env: {
+        'JWT_TOKEN': 'xablau',
+        'NODE_ENV': 'development'
+    },
     done: done
   })
 })

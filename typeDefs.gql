@@ -1,0 +1,32 @@
+type User {
+  _id: ID
+  name: String!
+  lastname: String!
+  username: String!
+  email: String!
+  password: String!
+  avatar: String
+  createdAt: String
+  updatedAt: String
+}
+
+type Post {
+  title: String!
+  slug: String!
+  content: String
+  imageUrl: String
+  categories: [String]!
+  published: Boolean!
+  likes: Int
+  author: User!
+  createdAt: String
+  updatedAt: String
+}
+
+type Query {
+  getPosts: [Post]
+}
+
+type Mutation {
+  createPost(title: String!, content: String, imageUrl: String, categories: [String]!, published: Boolean, author: ID!): Post!
+}

@@ -11,8 +11,10 @@ type User {
 }
 
 type Post {
+  _id: ID
   title: String!
   slug: String!
+  summary: String
   content: String
   imageUrl: String
   categories: [String]!
@@ -25,8 +27,9 @@ type Post {
 
 type Query {
   getPosts: [Post]
+  getPost(slug: String!): Post
 }
 
 type Mutation {
-  createPost(title: String!, content: String, imageUrl: String, categories: [String]!, published: Boolean, author: ID!): Post!
+  createPost(title: String!, summary: String, content: String, imageUrl: String, categories: [String]!, published: Boolean, author: ID!): Post!
 }
